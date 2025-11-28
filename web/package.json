@@ -6,7 +6,7 @@
   "packageManager": "pnpm@10.14.0",
   "license": "MIT",
   "repository": {
-    "url": "https://github.com/element-plus/element-plus-vite-starter"
+    "url": "https://github.com/SkyDynamic/QuickBackupM-Reforged-WebUI"
   },
   "scripts": {
     "dev": "vite",
