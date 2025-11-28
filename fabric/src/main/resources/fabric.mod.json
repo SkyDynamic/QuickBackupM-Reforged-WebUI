@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "quickbackupmulti-webui",
+  "version": "${version}",
+  "name": "QBMReforgedWebUI",
+  "description": "A small patch for Litematica (newer versions) to prevent command feedback from being sent when pasting schematics unless 'SendCommandFeedback' is true.",
+  "authors": [
+    "SkyDynamic"
+  ],
+  "contact": {
+    "homepage": ""
+  },
+  "license": "MIT",
+  "icon": "assets/quickbackupmulti-webui/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.skydynamic.quickbackupmulti.fabric.WebUIFabric"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.10",
+    "minecraft": "~1.21",
+    "java": ">=21",
+    "quickbakcupmulti_reforged": ">=3.2.5"
+  }
+}

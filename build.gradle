@@ -1,0 +1,64 @@
+plugins {
+    id 'dev.architectury.loom' version '1.11-SNAPSHOT' apply false
+    id 'architectury-plugin' version '3.4-SNAPSHOT'
+    id 'com.github.johnrengelman.shadow' version '8.1.1' apply false
+    id 'com.github.node-gradle.node' version '7.1.0' apply false
+}
+
+architectury {
+    minecraft = project.minecraft_version
+}
+
+allprojects {
+    group = rootProject.maven_group
+    version = rootProject.mod_version
+}
+
+subprojects {
+    apply plugin: 'dev.architectury.loom'
+    apply plugin: 'architectury-plugin'
+    apply plugin: 'maven-publish'
+
+    base {
+        archivesName = "$rootProject.archives_name-mc$rootProject.minecraft_version-v$rootProject.mod_version-$project.name"
+    }
+
+    repositories {
+        maven {
+            name "CjsahMaven"
+            url "https://server.cjsah.net:1002/maven/"
+        }
+    }
+
+    dependencies {
+        minecraft "net.minecraft:minecraft:$rootProject.minecraft_version"
+        mappings loom.officialMojangMappings()
+
+        modCompileOnly "io.github.skydynamic:quickbackupmulti-reforged-common:1.21-3.2.5"
+        compileOnlyApi "io.github.skydynamic:incremental-storage-lib:1.3.0+build.25111411.36"
+        compileOnlyApi "org.jetbrains.exposed:exposed-core:0.57.0"
+
+        implementation 'org.glassfish.jersey.containers:jersey-container-grizzly2-http:3.1.10'
+        implementation 'org.glassfish.jersey.core:jersey-server:3.1.10'
+        implementation 'org.glassfish.jersey.media:jersey-media-json-jackson:3.1.10'
+        implementation 'org.glassfish.jersey.inject:jersey-hk2:3.1.10'
+
+        implementation 'io.jsonwebtoken:jjwt-api:0.13.0'
+        runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.13.0'
+        runtimeOnly 'io.jsonwebtoken:jjwt-gson:0.13.0'
+
+        compileOnly("org.projectlombok:lombok:1.18.42")
+	    annotationProcessor("org.projectlombok:lombok:1.18.42")
+    }
+
+    java {
+        withSourcesJar()
+
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        it.options.release = 21
+    }
+}

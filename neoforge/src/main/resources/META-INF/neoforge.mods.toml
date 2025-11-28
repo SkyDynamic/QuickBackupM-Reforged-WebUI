@@ -1,0 +1,37 @@
+modLoader = "javafml"
+loaderVersion = "[2,)"
+#issueTrackerURL = ""
+license = "MIT"
+
+[[mods]]
+modId = "quickbackupmulti-webui"
+version = "${version}"
+displayName = "QBMReforgedWebUI"
+authors = "SkyDynamic"
+description = '''
+A small patch for Litematica (newer versions) to prevent command feedback from being sent when pasting schematics unless 'SendCommandFeedback' is true.
+'''
+#logoFile = ""
+
+[[dependencies.quickbackupmulti-webui]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.quickbackupmulti-webui]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.quickbackupmulti-webui]]
+modId = "quickbakcupmulti_reforged"
+type = "required"
+versionRange = "[1.21,)"
+ordering = "NONE"
+side = "BOTH"
+
+
