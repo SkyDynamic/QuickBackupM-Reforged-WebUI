@@ -10,6 +10,11 @@ public class ApiResponse<T> {
     private int statusCode;
     private T message;
 
+    public ApiResponse(int statusCode, T message) {
+        this.statusCode = statusCode;
+        this.message = message;
+    }
+
     public ApiResponse(ApiStatusCode status, T message) {
         this.statusCode = status.getCode();
         this.message = message;

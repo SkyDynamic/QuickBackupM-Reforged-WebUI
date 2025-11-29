@@ -3,6 +3,7 @@ package io.github.skydynamic.quickbackupmulti.api;
 import io.github.skydynamic.increment.storage.lib.database.StorageInfo;
 import io.github.skydynamic.quickbackupmulti.response.ApiResponse;
 import io.github.skydynamic.quickbackupmulti.response.ApiStatusCode;
+import io.github.skydynamic.quickbackupmulti.security.RequireLogin;
 import io.github.skydynamic.quickbakcupmulti.QuickbakcupmultiReforged;
 import io.github.skydynamic.quickbakcupmulti.restore.RestoreTimer;
 import io.github.skydynamic.quickbakcupmulti.utils.BackupManager;
@@ -50,6 +51,7 @@ public class BackupManagerApi {
         }
     }
 
+    @RequireLogin
     @POST
     @Path("delete")
     @Produces(MediaType.APPLICATION_JSON)
@@ -66,6 +68,7 @@ public class BackupManagerApi {
         }
     }
 
+    @RequireLogin
     @POST
     @Path("create")
     @Produces(MediaType.APPLICATION_JSON)
@@ -95,6 +98,7 @@ public class BackupManagerApi {
         }
     }
 
+    @RequireLogin
     @POST
     @Path("restore")
     @Produces(MediaType.APPLICATION_JSON)

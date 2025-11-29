@@ -1,17 +1,19 @@
 import type { UserModule } from './types'
 import { ViteSSG } from 'vite-ssg'
+import { createApp } from 'vue'
 
 import { routes } from 'vue-router/auto-routes'
+
+import LoginApp from '~/LoginApp.vue'
 import App from './App.vue'
 
 import '~/styles/index.scss'
-
 import 'uno.css'
 import 'element-plus/theme-chalk/src/message.scss'
 import 'element-plus/theme-chalk/src/message-box.scss'
 import 'element-plus/theme-chalk/src/overlay.scss'
 
-export const createApp = ViteSSG(
+export const app = ViteSSG(
   App,
   {
     routes,
@@ -22,3 +24,5 @@ export const createApp = ViteSSG(
       .forEach(i => i.install?.(ctx))
   },
 )
+
+export const loginAPP = createApp(LoginApp).mount('#loginApp')

@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.util.logging.Level;
 
 public final class WebUI {
-    public static final String MOD_ID = "quickbackupmulti-webui";
+    public static final String MOD_ID = "quickbackupmulti_webui";
 
     @Getter
     private static final String MOD_NAME = "QuickBackupMultiR-WebUI";
@@ -40,6 +40,6 @@ public final class WebUI {
     }
 
     private static void disableGrizzlyLog() {
-        java.util.logging.Logger.getLogger("").setLevel(Level.OFF);
+        // java.util.logging.Logger.getLogger("").setLevel(Level.OFF);
     }
 }

@@ -1,4 +1,12 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
+import { verifyToken } from '~/composables/login'
+
+onMounted(async () => {
+  if (!await verifyToken()) {
+    window.location.href = '/login'
+  }
+})
 </script>
 
 <template>

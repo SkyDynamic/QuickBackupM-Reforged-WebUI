@@ -4,30 +4,30 @@ loaderVersion = "[2,)"
 license = "MIT"
 
 [[mods]]
-modId = "quickbackupmulti-webui"
+modId = "quickbackupmulti_webui"
 version = "${version}"
-displayName = "QBMReforgedWebUI"
+displayName = "QuickBakcupMulti-Reforged-WebUI"
 authors = "SkyDynamic"
 description = '''
-A small patch for Litematica (newer versions) to prevent command feedback from being sent when pasting schematics unless 'SendCommandFeedback' is true.
+A extension mod for QuickBackupMulti Reforged that adds a web user interface for managing backups.
 '''
 #logoFile = ""
 
-[[dependencies.quickbackupmulti-webui]]
+[[dependencies.quickbackupmulti_webui]]
 modId = "neoforge"
 type = "required"
 versionRange = "[21,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.quickbackupmulti-webui]]
+[[dependencies.quickbackupmulti_webui]]
 modId = "minecraft"
 type = "required"
 versionRange = "[1.21,)"
 ordering = "NONE"
 side = "BOTH"
 
-[[dependencies.quickbackupmulti-webui]]
+[[dependencies.quickbackupmulti_webui]]
 modId = "quickbakcupmulti_reforged"
 type = "required"
 versionRange = "[1.21,)"

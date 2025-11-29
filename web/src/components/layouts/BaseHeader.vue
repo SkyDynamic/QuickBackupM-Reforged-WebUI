@@ -6,6 +6,14 @@ import { isDark, toggleDark } from '~/composables'
 import DarkIcon from '~/icons/dark.vue'
 import LightIcon from '~/icons/light.vue'
 
+const props = defineProps({
+  ignoreIndexNav: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+})
+
 const emit = defineEmits(['toggled'])
 const attrs = useAttrs()
 
@@ -19,6 +27,8 @@ watch(
 )
 
 const switchRef = useTemplateRef('switchRef')
+
+const headerNavIndex = props.ignoreIndexNav ? '/login' : '/'
 
 function handleBeforeChange() {
   return new Promise<boolean>((resolve) => {
@@ -79,7 +89,7 @@ function handleChange(val) {
 
 <template>
   <el-menu class="el-menu" mode="horizontal" :ellipsis="false" router>
-    <el-menu-item index="/">
+    <el-menu-item :index="headerNavIndex">
       <div class="flex items-center justify-center gap-2">
         <div class="logo-container">
           <img src="../../assets/logo.png" class="logo" alt="QBM Logo">

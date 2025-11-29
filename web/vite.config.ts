@@ -1,9 +1,12 @@
 import path from 'node:path'
-import Vue from '@vitejs/plugin-vue'
+// eslint-disable-next-line import/no-duplicates
+import { resolve } from 'node:path'
 
+import Vue from '@vitejs/plugin-vue'
 import Unocss from 'unocss/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
+
 import VueRouter from 'unplugin-vue-router/vite'
 
 import { defineConfig } from 'vite'
@@ -51,7 +54,14 @@ export default defineConfig({
     // see uno.config.ts for config
     Unocss(),
   ],
-
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        login: resolve(__dirname, 'login.html'),
+      },
+    },
+  },
   ssr: {
     // TODO: workaround until they support native ESM
     noExternal: ['element-plus'],

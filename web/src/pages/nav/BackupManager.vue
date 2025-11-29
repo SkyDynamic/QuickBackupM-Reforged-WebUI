@@ -4,6 +4,7 @@ import { Refresh, Search } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 
 import { computed, onMounted, ref } from 'vue'
+import { verifyToken } from '~/composables/login'
 
 const backupList = ref<{ name: string, desc: string, timestamp: bigint, useIncrementalStorage: boolean }[]>([])
 
@@ -31,7 +32,7 @@ const filteredBackups = computed(() =>
 )
 
 async function fetchBackups() {
-  const response = await fetch('http://localhost:53222/api/backups/getAll', { method: 'GET' })
+  const response = await fetch('/api/backups/getAll', { method: 'GET' })
   const data = await response.json()
 
   return data.message
@@ -51,11 +52,13 @@ async function restoreBackup(name: string) {
       type: 'warning',
     },
   ).then(async () => {
-    const response = await fetch('http://localhost:53222/api/backups/restore', {
+    const headers = new Headers()
+    headers.append('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8')
+    headers.append('X-Login-Token', <string>localStorage.getItem('qbmRauthToken'))
+
+    const response = await fetch('/api/backups/restore', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-      },
+      headers: headers,
       body: new URLSearchParams({
         name,
       }),
@@ -91,11 +94,13 @@ async function deleteBackup(name: string) {
       type: 'warning',
     },
   ).then(async () => {
-    const response = await fetch('http://localhost:53222/api/backups/delete', {
+    const headers = new Headers()
+    headers.append('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8')
+    headers.append('X-Login-Token', <string>localStorage.getItem('qbmRauthToken'))
+
+    const response = await fetch('/api/backups/delete', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-      },
+      headers: headers,
       body: new URLSearchParams({
         name,
       }),
@@ -134,11 +139,13 @@ async function createBackup() {
   waitCreateBackup.value = true
   createButtonDisable.value = true
 
-  const response = await fetch('http://localhost:53222/api/backups/create', {
+  const headers = new Headers()
+  headers.append('Content-Type', 'application/x-www-form-urlencoded;charset=UTF-8')
+  headers.append('X-Login-Token', <string>localStorage.getItem('qbmRauthToken'))
+
+  const response = await fetch('/api/backups/create', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-    },
+    headers: headers,
     body: new URLSearchParams({
       name: createBackupName.value.replace(' ', '_'),
       desc: createBackupDesc.value,
@@ -171,12 +178,17 @@ async function createBackup() {
   await refreshBackups()
 }
 
-onMounted(() => {
-  refreshBackups()
+onMounted(async () => {
+  if (!await verifyToken()) {
+    document.location.href = '/login'
+  }
+  else {
+    await refreshBackups()
 
-  intervalId.value = setInterval(() => {
-    refreshBackups()
-  }, 30 * 1000)
+    intervalId.value = setInterval(() => {
+      refreshBackups()
+    }, 30 * 1000)
+  }
 })
 </script>
 
