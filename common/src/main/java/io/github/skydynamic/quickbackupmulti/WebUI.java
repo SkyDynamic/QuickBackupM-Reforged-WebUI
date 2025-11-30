@@ -40,6 +40,6 @@ public final class WebUI {
     }
 
     private static void disableGrizzlyLog() {
-        // java.util.logging.Logger.getLogger("").setLevel(Level.OFF);
+        java.util.logging.Logger.getLogger("").setLevel(Level.OFF);
     }
 }

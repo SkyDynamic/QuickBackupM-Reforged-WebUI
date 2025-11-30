@@ -21,7 +21,7 @@ const intervalId = ref()
 
 const filteredBackups = computed(() =>
   backupList.value
-    .slice(1)
+    .slice(0)
     .filter((group) => {
       const value = query.value.trim().toLowerCase()
       return (

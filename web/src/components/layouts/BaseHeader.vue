@@ -28,7 +28,7 @@ watch(
 
 const switchRef = useTemplateRef('switchRef')
 
-const headerNavIndex = props.ignoreIndexNav ? '/login' : '/'
+const headerNavIndex = ref(props.ignoreIndexNav ? '/login' : '/')
 
 function handleBeforeChange() {
   return new Promise<boolean>((resolve) => {
